@@ -1,0 +1,11 @@
+# Match runner — fetched & built by ./setup-fastchess.sh
+/fastchess/
+
+# Tournament output
+/results/
+
+# fastchess autosave / resume state (machine-specific paths + run stats)
+/config.json
+
+# Bots (binaries AND configs) — not committed; fetched by the bootstrap script
+/bots/
