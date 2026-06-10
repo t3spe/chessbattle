@@ -52,7 +52,8 @@ mkdir -p "$run"
 pgn="$run/games.pgn"
 summary="$run/summary.txt"
 
-echo "chessbattle: ${#names[@]} bots [${names[*]}] | round-robin | rounds=$ROUNDS | tc=$TC | concurrency=$CONCURRENCY"
+games=$(( ${#names[@]} * (${#names[@]} - 1) * ROUNDS ))
+echo "chessbattle: ${#names[@]} bots [${names[*]}] | round-robin | rounds=$ROUNDS = $games games | tc=$TC | concurrency=$CONCURRENCY"
 echo "results -> $run/"
 echo
 

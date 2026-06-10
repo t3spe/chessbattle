@@ -55,7 +55,7 @@ done
 rm -f "$tmp"
 
 # 5. quick game ------------------------------------------------------------
-say "Playing a quick game to verify"
+say "Playing a quick test game (fast) to verify"
 read -r a b _ <<<"$MODES"
 if out=$(./fastchess/fastchess \
       -engine cmd="$PWD/bots/$a/$ASSET" name="$a" option.mode="$a" \
@@ -67,4 +67,18 @@ else
   echo "$out" | tail -15; die "fastchess game failed"
 fi
 
-say "Bootstrap complete. Run a tournament with:  ./battle.sh [rounds]"
+# 6. offer the full battle -------------------------------------------------
+nbots=$(find bots -maxdepth 2 -name bot.conf 2>/dev/null | wc -l)
+per_round=$(( nbots * (nbots - 1) ))   # round-robin, each pairing plays both colors
+tc=${TC:-60+0.5}
+say "Setup verified — $nbots bots ready in bots/"
+printf '\nA full battle is a round-robin: %d games per round at tc=%s.\n' "$per_round" "$tc"
+printf 'At this time control each game runs a couple of minutes, one at a time.\n\n'
+rounds=""
+[ -t 0 ] && read -r -p "How many rounds to play now? (enter a number, or just Enter to skip) " rounds
+if [[ "$rounds" =~ ^[1-9][0-9]*$ ]]; then
+  say "Starting the battle: $rounds round(s) = $(( per_round * rounds )) games at tc=$tc"
+  exec ./battle.sh "$rounds"
+else
+  printf '\nSkipped. Start anytime with:  ./battle.sh [rounds]   (e.g. ./battle.sh 2)\n'
+fi
