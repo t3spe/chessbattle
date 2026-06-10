@@ -6,7 +6,7 @@
 # Each bots/<name>/bot.conf defines one contestant:
 #   name=<display name>
 #   cmd=<executable inside this folder>
-#   opts=<extra fastchess engine args, space-separated, e.g. option.mode=anton>
+#   opts=<extra fastchess engine args, space-separated, e.g. option.Hash=128>
 #
 # Overridable via env: TC (time control), CONCURRENCY, BOOK.
 set -euo pipefail
@@ -14,7 +14,7 @@ cd "$(dirname "$0")"
 
 TC="${TC:-60+0.5}"               # base+increment seconds, per side
 ROUNDS="${1:-${ROUNDS:-2}}"      # N rounds (= N distinct openings) per pairing
-CONCURRENCY="${CONCURRENCY:-1}"  # 1: anton uses all cores, so parallel games would oversubscribe
+CONCURRENCY="${CONCURRENCY:-1}"  # 1: engines often use all cores; parallel games oversubscribe & skew results
 BOOK="${BOOK:-openings/book.epd}"
 FASTCHESS="./fastchess/fastchess"
 

@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
 
 REPO="https://github.com/Disservin/fastchess.git"
 # Pinned commit: fastchess alpha 1.8.1 (2026-06-06), a few commits past the
-# v1.8.1-alpha tag — the exact build son-of-anton was validated against.
+# v1.8.1-alpha tag — pinned so everyone builds the same validated runner.
 # Bump deliberately to upgrade.
 REF="58072f231dc1ae33204254f867afd0a195f21a2e"
 DIR="fastchess"
