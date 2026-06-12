@@ -9,3 +9,7 @@
 
 # Bots (binaries AND configs) — not committed; fetched by the bootstrap script
 /bots/
+
+# chess-eval-scaling engine — cloned & built in-tree by ./bootstrap.sh
+# (skipped when an existing build is reused, e.g. a sibling checkout)
+/chess-eval-scaling/
